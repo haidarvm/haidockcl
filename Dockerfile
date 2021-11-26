@@ -1,6 +1,5 @@
-FROM clearlinux:base
-#install php-basic
-RUN swupd update && swupd bundle-add php-basic 
+FROM php:latest
+RUN apt update
 #copy file
 COPY index.php /var/www/html/index.php
 EXPOSE 8
