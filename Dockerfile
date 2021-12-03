@@ -1,4 +1,4 @@
-FROM clearlinux:base
+FROM fedora:latest
 #install php-basic
 RUN swupd update && swupd bundle-add php-basic 
 #copy file
