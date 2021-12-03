@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb-latest
+    command: --default-authentication-plugin=mysql_native_password
+    #        working_dir: /application
+    environment:
+      - MYSQL_ROOT_PASSWORD=haidock
+      - MYSQL_DATABASE=haidock
+      - MYSQL_USER=haidock
+      - MYSQL_PASSWORD=bismillah
+    volumes:
+      - ./my.cnf:/etc/mysql/mariadb.conf.d/my.cnf
+      - ./country.sql:/docker-entrypoint-initdb.d/country.sql:ro
+    restart: always
+    ports:
+      - "13306:3306"
+  website:
+    container_name: haidock
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:80
+    depends_on:
+      - mariadb
